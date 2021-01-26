@@ -1,5 +1,6 @@
 package com.dev.cinema.model;
 
+import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -47,5 +48,23 @@ public class Movie {
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object movieComp) {
+        if (this == movieComp) {
+            return true;
+        }
+        if (movieComp == null || getClass() != movieComp.getClass()) {
+            return false;
+        }
+        Movie movie = (Movie) movieComp;
+        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title)
+                && Objects.equals(description, movie.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, description);
     }
 }
