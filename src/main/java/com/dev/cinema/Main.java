@@ -6,7 +6,8 @@ import com.dev.cinema.service.MovieService;
 
 public class Main {
     private static final Injector injector = Injector.getInstance("com.dev.cinema");
-    private static final MovieService movieService = (MovieService) injector.getInstance(MovieService.class);
+    private static final MovieService movieService = (MovieService) injector
+            .getInstance(MovieService.class);
 
     public static void main(String[] args) {
         Movie movie = new Movie();
