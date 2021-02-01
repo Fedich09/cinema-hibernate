@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "movie")
-public class Movie {
+@Table(name = "cinema_hall")
+public class CinemaHall {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private Integer capacity;
     private String description;
 
     public Long getId() {
@@ -24,12 +24,12 @@ public class Movie {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     public String getDescription() {
@@ -42,29 +42,29 @@ public class Movie {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Movie{");
+        final StringBuilder sb = new StringBuilder("CinemaHall{");
         sb.append("id=").append(id);
-        sb.append(", title='").append(title).append('\'');
+        sb.append(", capacity=").append(capacity);
         sb.append(", description='").append(description).append('\'');
         sb.append('}');
         return sb.toString();
     }
 
     @Override
-    public boolean equals(Object movieComp) {
-        if (this == movieComp) {
+    public boolean equals(Object first) {
+        if (this == first) {
             return true;
         }
-        if (movieComp == null || getClass() != movieComp.getClass()) {
+        if (first == null || getClass() != first.getClass()) {
             return false;
         }
-        Movie movie = (Movie) movieComp;
-        return Objects.equals(id, movie.id) && Objects.equals(title, movie.title)
-                && Objects.equals(description, movie.description);
+        CinemaHall that = (CinemaHall) first;
+        return Objects.equals(id, that.id) && Objects.equals(capacity, that.capacity)
+                && Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description);
+        return Objects.hash(id, capacity, description);
     }
 }
