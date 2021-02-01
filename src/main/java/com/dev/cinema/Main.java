@@ -40,7 +40,7 @@ public class Main {
         movieSession.setShowTime(LocalDateTime.of(2021, Month.MARCH, 23,
                 15, 0, 0));
         movieSessionService.add(movieSession);
-        List<MovieSession> movieSessions = movieSessionService.findAvailableSessions(1L,
+        List<MovieSession> movieSessions = movieSessionService.findAvailableSessions(movie.getId(),
                 LocalDate.of(2021, Month.MARCH, 23));
         System.out.println(movieSessions.toString());
     }

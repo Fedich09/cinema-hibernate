@@ -14,13 +14,17 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
+    public static final int HOUR = 23;
+    public static final int MINUTE = 59;
+
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             LocalDateTime startOfDay = date.atStartOfDay();
-            LocalDateTime endOfDay = date.atTime(23, 59);
-            Query<MovieSession> movieQuery = session.createQuery("from MovieSession ms join fetch "
-                    + "ms.movie where ms.movie.id = :id "
+            LocalDateTime endOfDay = date.atTime(HOUR, MINUTE);
+            Query<MovieSession> movieQuery = session.createQuery("from MovieSession ms "
+                    + "join fetch ms.movie "
+                    + "where ms.movie.id = :id "
                     + "and ms.showTime >= :start "
                     + "and ms.showTime <= :end", MovieSession.class);
             movieQuery.setParameter("id", movieId);

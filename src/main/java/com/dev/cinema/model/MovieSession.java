@@ -6,8 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,10 +16,12 @@ public class MovieSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     private Movie movie;
     @ManyToOne
+    @JoinColumn(name = "cinema_hall")
     private CinemaHall cinemaHall;
+    @JoinColumn(name = "show_time")
     private LocalDateTime showTime;
 
     public Long getId() {
@@ -56,13 +58,12 @@ public class MovieSession {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("MovieSession{");
-        sb.append("id=").append(id);
-        sb.append(", movie=").append(movie);
-        sb.append(", cinemaHall=").append(cinemaHall);
-        sb.append(", showTime=").append(showTime);
-        sb.append('}');
-        return sb.toString();
+        return "MovieSession{"
+                + "id=" + id
+                + ", movie=" + movie
+                + ", cinemaHall=" + cinemaHall
+                + ", showTime=" + showTime
+                + '}';
     }
 
     @Override
