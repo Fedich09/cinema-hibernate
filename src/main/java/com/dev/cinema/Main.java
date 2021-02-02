@@ -4,9 +4,12 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.User;
+import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -20,6 +23,10 @@ public class Main {
             injector.getInstance(MovieSessionService.class);
     private static final CinemaHallService cinemaHallService = (CinemaHallService)
             injector.getInstance(CinemaHallService.class);
+    private static final UserService userService = (UserService)
+            injector.getInstance(UserService.class);
+    private static final AuthenticationService authenticationService = (AuthenticationService)
+            injector.getInstance(AuthenticationService.class);
 
     public static void main(String[] args) {
         Movie movie = new Movie();
@@ -43,5 +50,10 @@ public class Main {
         List<MovieSession> movieSessions = movieSessionService.findAvailableSessions(movie.getId(),
                 LocalDate.of(2021, Month.MARCH, 23));
         System.out.println(movieSessions.toString());
+
+        User user = new User();
+        user.setEmail("example@gmail.com");
+        user.setPassword("bob123");
+        userService.add(user);
     }
 }
