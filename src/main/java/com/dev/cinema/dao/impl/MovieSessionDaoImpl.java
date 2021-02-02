@@ -7,6 +7,7 @@ import com.dev.cinema.model.MovieSession;
 import com.dev.cinema.util.HibernateUtil;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -14,16 +15,13 @@ import org.hibernate.query.Query;
 
 @Dao
 public class MovieSessionDaoImpl implements MovieSessionDao {
-    public static final int HOUR = 23;
-    public static final int MINUTE = 59;
 
     @Override
     public List<MovieSession> findAvailableSessions(Long movieId, LocalDate date) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             LocalDateTime startOfDay = date.atStartOfDay();
-            LocalDateTime endOfDay = date.atTime(HOUR, MINUTE);
+            LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
             Query<MovieSession> movieQuery = session.createQuery("from MovieSession ms "
-                    + "join fetch ms.movie "
                     + "where ms.movie.id = :id "
                     + "and ms.showTime >= :start "
                     + "and ms.showTime <= :end", MovieSession.class);
