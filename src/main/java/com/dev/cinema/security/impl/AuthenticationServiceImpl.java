@@ -7,6 +7,7 @@ import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.util.HashUtil;
+import java.util.Optional;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {
@@ -15,12 +16,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String email, String password) throws AuthenticationException {
-        User user = userService.findByEmail(email).orElseThrow(() ->
-                new AuthenticationException("User with this "
-                        + "email or password not exist in the db "));
-        String passwordCheck = HashUtil.hashPassword(password, user.getSalt());
-        if (user.getPassword().equals(passwordCheck)) {
-            return user;
+        Optional<User> user = userService.findByEmail(email);
+        if (user.isPresent() && user.get().getPassword()
+                .equals(HashUtil.hashPassword(password, user.get().getSalt()))) {
+            return user.get();
         }
         throw new AuthenticationException("Wrong email or password ");
     }
