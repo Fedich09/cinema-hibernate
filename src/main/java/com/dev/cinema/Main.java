@@ -5,14 +5,18 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
+import com.dev.cinema.model.ShoppingCart;
+import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -27,6 +31,8 @@ public class Main {
             injector.getInstance(UserService.class);
     private static final AuthenticationService authenticationService = (AuthenticationService)
             injector.getInstance(AuthenticationService.class);
+    private static final ShoppingCartService shoppingCartService = (ShoppingCartService)
+            injector.getInstance(ShoppingCartService.class);
 
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -52,6 +58,14 @@ public class Main {
         System.out.println(movieSessions.toString());
 
         authenticationService.register("example@gmail.com", "bob123");
-        authenticationService.login("example@gmail.com", "bob123");
+        User user = authenticationService.login("example@gmail.com", "bob123");
+        User user2 = authenticationService.register("123@gmail.com", "123");
+        shoppingCartService.addSession(movieSession, user);
+        shoppingCartService.addSession(movieSession, user2);
+        shoppingCartService.clear(shoppingCartService.getByUser(user2));
+        System.out.println(shoppingCartService.getByUser(user));
+        ShoppingCart byUser = shoppingCartService.getByUser(user);
+        byUser.setTickets(new ArrayList<>());
+        shoppingCartService.clear(byUser);
     }
 }
