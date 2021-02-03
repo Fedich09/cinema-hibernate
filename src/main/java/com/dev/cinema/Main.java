@@ -16,7 +16,6 @@ import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
@@ -65,7 +64,6 @@ public class Main {
         shoppingCartService.clear(shoppingCartService.getByUser(user2));
         System.out.println(shoppingCartService.getByUser(user));
         ShoppingCart byUser = shoppingCartService.getByUser(user);
-        byUser.setTickets(new ArrayList<>());
         shoppingCartService.clear(byUser);
     }
 }
