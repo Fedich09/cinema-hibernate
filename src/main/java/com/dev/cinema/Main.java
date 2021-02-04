@@ -5,12 +5,12 @@ import com.dev.cinema.lib.Injector;
 import com.dev.cinema.model.CinemaHall;
 import com.dev.cinema.model.Movie;
 import com.dev.cinema.model.MovieSession;
-import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.User;
 import com.dev.cinema.security.AuthenticationService;
 import com.dev.cinema.service.CinemaHallService;
 import com.dev.cinema.service.MovieService;
 import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.OrderService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import java.time.LocalDate;
@@ -32,6 +32,8 @@ public class Main {
             injector.getInstance(AuthenticationService.class);
     private static final ShoppingCartService shoppingCartService = (ShoppingCartService)
             injector.getInstance(ShoppingCartService.class);
+    private static final OrderService orderService = (OrderService)
+            injector.getInstance(OrderService.class);
 
     public static void main(String[] args) throws AuthenticationException {
         Movie movie = new Movie();
@@ -39,13 +41,11 @@ public class Main {
         movie.setDescription("Interesting action with Vin Diesel in main role");
         movieService.add(movie);
         movieService.getAll().forEach(System.out::println);
-
         CinemaHall cinemaHall = new CinemaHall();
         cinemaHall.setCapacity(10);
         cinemaHall.setDescription("Fast");
         cinemaHallService.add(cinemaHall);
         cinemaHallService.getAll().forEach(System.out::println);
-
         MovieSession movieSession = new MovieSession();
         movieSession.setMovie(movie);
         movieSession.setCinemaHall(cinemaHall);
@@ -55,7 +55,6 @@ public class Main {
         List<MovieSession> movieSessions = movieSessionService.findAvailableSessions(movie.getId(),
                 LocalDate.of(2021, Month.MARCH, 23));
         System.out.println(movieSessions.toString());
-
         authenticationService.register("example@gmail.com", "bob123");
         User user = authenticationService.login("example@gmail.com", "bob123");
         User user2 = authenticationService.register("123@gmail.com", "123");
@@ -63,7 +62,7 @@ public class Main {
         shoppingCartService.addSession(movieSession, user2);
         shoppingCartService.clear(shoppingCartService.getByUser(user2));
         System.out.println(shoppingCartService.getByUser(user));
-        ShoppingCart byUser = shoppingCartService.getByUser(user);
-        shoppingCartService.clear(byUser);
+        orderService.completeOrder(shoppingCartService.getByUser(user));
+        System.out.println(orderService.getOrdersHistory(user));
     }
 }

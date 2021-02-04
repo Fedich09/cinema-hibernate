@@ -9,6 +9,7 @@ import com.dev.cinema.model.ShoppingCart;
 import com.dev.cinema.model.Ticket;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.ShoppingCartService;
+import java.util.List;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -23,8 +24,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ticket.setMovieSession(movieSession);
         ticket.setUser(user);
         ShoppingCart cartByUser = shoppingCartDao.getByUser(user);
-        cartByUser.getTickets().add(ticket);
         ticketDao.add(ticket);
+        List<Ticket> tickets = cartByUser.getTickets();
+        tickets.add(ticket);
         shoppingCartDao.update(cartByUser);
     }
 
