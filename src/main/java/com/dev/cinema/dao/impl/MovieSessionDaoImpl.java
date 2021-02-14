@@ -61,4 +61,56 @@ public class MovieSessionDaoImpl implements MovieSessionDao {
             }
         }
     }
+
+    @Override
+    public void delete(Long id) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            MovieSession movieSession = session.load(MovieSession.class, id);
+            session.delete(movieSession);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't delete movie session by id " + id, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public void update(MovieSession movieSession) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            session.update(movieSession);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            throw new DataProcessingException("Can't update movie session " + movieSession, e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+    @Override
+    public MovieSession get(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.get(MovieSession.class, id);
+        } catch (Exception e) {
+            throw new DataProcessingException("Can't get movie session by id " + id, e);
+        }
+    }
 }
