@@ -23,12 +23,12 @@ public class CinemaHallController {
         this.cinemaHallService = cinemaHallService;
     }
 
-    @PostMapping()
+    @PostMapping
     public void create(@RequestBody CinemaHallRequestDto requestDto) {
         cinemaHallService.add(cinemaHallMapperImpl.toEntity(requestDto));
     }
 
-    @RequestMapping()
+    @RequestMapping
     public List<CinemaHallResponseDto> getAll() {
         return cinemaHallService.getAll().stream()
                 .map(cinemaHallMapperImpl::toDto)

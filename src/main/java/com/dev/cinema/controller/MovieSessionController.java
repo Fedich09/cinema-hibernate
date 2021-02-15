@@ -6,9 +6,9 @@ import com.dev.cinema.model.dto.MovieSessionResponseDto;
 import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.mapper.impl.MovieSessionMapperImpl;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,10 +37,10 @@ public class MovieSessionController {
 
     @RequestMapping("/available")
     public List<MovieSessionResponseDto> getAvailableSession(@RequestParam(value =
-            "movieId") Long id, @RequestParam(value = "date") String showTime) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+            "movieId") Long id, @RequestParam(value = "date") @DateTimeFormat(pattern =
+            "dd.MM.yyyy") LocalDate showTime) {
         return movieSessionService.findAvailableSessions(id,
-                LocalDate.parse(showTime, formatter)).stream()
+                showTime).stream()
                 .map(sessionMapper::toDto)
                 .collect(Collectors.toList());
     }
