@@ -1,8 +1,8 @@
-package com.dev.cinema.model.dto;
+package com.dev.cinema.model.dto.cinemahall;
 
-public class MovieResponseDto {
+public class CinemaHallResponseDto {
     private Long id;
-    private String title;
+    private Integer capacity;
     private String description;
 
     public Long getId() {
@@ -13,12 +13,12 @@ public class MovieResponseDto {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public Integer getCapacity() {
+        return capacity;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     public String getDescription() {

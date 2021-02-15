@@ -1,8 +1,8 @@
 package com.dev.cinema.service.mapper.impl;
 
 import com.dev.cinema.model.CinemaHall;
-import com.dev.cinema.model.dto.CinemaHallRequestDto;
-import com.dev.cinema.model.dto.CinemaHallResponseDto;
+import com.dev.cinema.model.dto.cinemahall.CinemaHallRequestDto;
+import com.dev.cinema.model.dto.cinemahall.CinemaHallResponseDto;
 import com.dev.cinema.service.mapper.CinemaHallMapper;
 import org.springframework.stereotype.Component;
 
