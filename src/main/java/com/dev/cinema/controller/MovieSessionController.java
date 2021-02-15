@@ -10,6 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -44,16 +45,16 @@ public class MovieSessionController {
                 .collect(Collectors.toList());
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public void update(@RequestBody MovieSessionRequestDto movieSessionRequestDto,
-                       @RequestParam Long id) {
+                       @PathVariable Long id) {
         MovieSession movieSession = sessionMapper.toEntity(movieSessionRequestDto);
         movieSession.setId(id);
         movieSessionService.update(movieSession);
     }
 
-    @DeleteMapping
-    public void delete(@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
         movieSessionService.delete(id);
     }
 }
