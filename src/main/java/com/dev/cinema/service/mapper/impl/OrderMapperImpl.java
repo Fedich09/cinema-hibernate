@@ -13,7 +13,8 @@ public class OrderMapperImpl implements OrderMapper {
     public OrderResponseDto toDto(Order order) {
         OrderResponseDto orderResponseDto = new OrderResponseDto();
         orderResponseDto.setId(order.getId());
-        orderResponseDto.setOrderDateTime(order.getOrderDate().toLocalDate());
+        orderResponseDto.setUserId(order.getUser().getId());
+        orderResponseDto.setOrderDateTime(order.getOrderDate().toString());
         orderResponseDto.setTicketIds(order.getTickets().stream()
                 .map(Ticket::getId)
                 .collect(Collectors.toList()));

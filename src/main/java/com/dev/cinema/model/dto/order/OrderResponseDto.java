@@ -1,12 +1,11 @@
 package com.dev.cinema.model.dto.order;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public class OrderResponseDto {
     private Long id;
     private List<Long> ticketIds;
-    private LocalDate orderDateTime;
+    private String orderDateTime;
     private Long userId;
 
     public Long getId() {
@@ -25,11 +24,11 @@ public class OrderResponseDto {
         this.ticketIds = ticketIds;
     }
 
-    public LocalDate getOrderDateTime() {
+    public String getOrderDateTime() {
         return orderDateTime;
     }
 
-    public void setOrderDateTime(LocalDate orderDateTime) {
+    public void setOrderDateTime(String orderDateTime) {
         this.orderDateTime = orderDateTime;
     }
 

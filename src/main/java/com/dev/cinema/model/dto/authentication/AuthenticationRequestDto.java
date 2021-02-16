@@ -1,8 +1,5 @@
 package com.dev.cinema.model.dto.authentication;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class AuthenticationRequestDto {
     private String email;
     private String password;

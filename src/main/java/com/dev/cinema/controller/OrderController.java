@@ -7,6 +7,7 @@ import com.dev.cinema.service.UserService;
 import com.dev.cinema.service.mapper.OrderMapper;
 import java.util.List;
 import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +36,7 @@ public class OrderController {
         orderService.completeOrder(cartService.getByUser(userService.get(userId)));
     }
 
-    @RequestMapping
+    @GetMapping
     public List<OrderResponseDto> getOrdersHistoryForUser(@RequestParam Long userId) {
         return orderService.getOrdersHistory(userService.get(userId)).stream()
                 .map(orderMapper::toDto)
