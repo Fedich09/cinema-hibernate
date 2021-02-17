@@ -1,13 +1,12 @@
 package com.dev.cinema.annotation.impl;
 
 import com.dev.cinema.annotation.PasswordConstraint;
-import com.dev.cinema.model.dto.authentication.AuthenticationRequestDto;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.BeanWrapperImpl;
 
 public class PasswordValidator implements ConstraintValidator<PasswordConstraint,
-        AuthenticationRequestDto> {
+        Object> {
     private String password;
     private String repeatPassword;
 
@@ -18,14 +17,12 @@ public class PasswordValidator implements ConstraintValidator<PasswordConstraint
     }
 
     @Override
-    public boolean isValid(AuthenticationRequestDto authRequestDto,
+    public boolean isValid(Object authRequestDto,
                            ConstraintValidatorContext constraintValidatorContext) {
-        AuthenticationRequestDto fieldValue = (AuthenticationRequestDto)
-                new BeanWrapperImpl(authRequestDto)
-                        .getPropertyValue(password);
-        AuthenticationRequestDto fieldMatchValue = (AuthenticationRequestDto)
-                new BeanWrapperImpl(authRequestDto)
-                        .getPropertyValue(repeatPassword);
+        Object fieldValue = new BeanWrapperImpl(authRequestDto)
+                .getPropertyValue(password);
+        Object fieldMatchValue = new BeanWrapperImpl(authRequestDto)
+                .getPropertyValue(repeatPassword);
         if (fieldValue != null) {
             return fieldValue.equals(fieldMatchValue);
         } else {
