@@ -6,8 +6,7 @@ import javax.validation.ConstraintValidatorContext;
 
 public class EmailValidator implements ConstraintValidator<EmailConstraint, String> {
 
-    public static final String REGEX = "^[\\\\w!#$%&’*+/=?`{|}~^-]+(?:\\\\."
-            + "[\\\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\\\.)+[a-zA-Z]{2,6}$";
+    public static final String REGEX = "^[A-Za-z0-9+_.-]+@(.+)$";
 
     @Override
     public boolean isValid(String email, ConstraintValidatorContext constraintValidatorContext) {
