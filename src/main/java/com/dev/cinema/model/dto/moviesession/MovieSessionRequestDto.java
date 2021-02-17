@@ -1,8 +1,17 @@
 package com.dev.cinema.model.dto.moviesession;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 public class MovieSessionRequestDto {
+    @NotNull(message = "The movieId couldn't be null")
+    @Min(value = 1, message = "Length should be longer then 1")
     private Long movieId;
+    @NotNull(message = "The cinemaHallId couldn't be null")
+    @Min(value = 1, message = "Length should be longer then 1")
     private Long cinemaHallId;
+    @Size(min = 10, message = "Length should be longer then 10")
     private String showTime;
 
     public Long getMovieId() {
