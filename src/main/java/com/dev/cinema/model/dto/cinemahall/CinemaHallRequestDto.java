@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 
 public class CinemaHallRequestDto {
     @NotNull(message = "The capacity couldn't be null")
-    @Min(value = 1, message = "The capacity should be longer or equal 1")
+    @Min(value = 1, message = "The capacity should be greater or equal 1")
     private Integer capacity;
     @Size(min = 4, message = "The description should be longer then 4")
     private String description;

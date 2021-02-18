@@ -4,6 +4,7 @@ import com.dev.cinema.config.SecurityConfig;
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.UserService;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -23,9 +24,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByEmail(String email) {
-        return userDao.findByEmail(email).orElseThrow(() ->
-                new RuntimeException("Can't get by email " + email));
+    public Optional<User> findByEmail(String email) {
+        return userDao.findByEmail(email);
     }
 
     @Override

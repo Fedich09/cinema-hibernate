@@ -6,6 +6,7 @@ import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.service.mapper.OrderMapper;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -37,14 +38,16 @@ public class OrderController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         orderService.completeOrder(cartService
-                .getByUser(userService.findByEmail(details.getUsername())));
+                .getByUser(userService.findByEmail(details.getUsername()).orElseThrow(() ->
+                        new NoSuchElementException("Can't get by email "))));
     }
 
     @GetMapping
     public List<OrderResponseDto> getOrdersHistoryForUser(Authentication auth) {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
-        return orderService.getOrdersHistory(userService.findByEmail(details.getUsername()))
+        return orderService.getOrdersHistory(userService.findByEmail(details.getUsername())
+                .orElseThrow(() -> new NoSuchElementException("Can't get by email ")))
                 .stream()
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());

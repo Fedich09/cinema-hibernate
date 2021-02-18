@@ -3,6 +3,7 @@ package com.dev.cinema.controller;
 import com.dev.cinema.model.dto.user.UserResponseDto;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.service.mapper.UserMapper;
+import java.util.NoSuchElementException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class UserController {
     public UserResponseDto getByEmail(Authentication auth) {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
-        return userMapper.toDto(userService.findByEmail(details.getUsername()));
+        return userMapper.toDto(userService.findByEmail(details.getUsername()).orElseThrow(() ->
+                new NoSuchElementException("Can't get by email ")));
     }
 }

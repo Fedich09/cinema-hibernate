@@ -5,6 +5,7 @@ import com.dev.cinema.service.MovieSessionService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.service.mapper.ShoppingCartMapper;
+import java.util.NoSuchElementException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +37,8 @@ public class ShoppingCartController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         cartService.addSession(movieSessionService.get(movieSessionId),
-                userService.findByEmail(details.getUsername()));
+                userService.findByEmail(details.getUsername()).orElseThrow(() ->
+                        new NoSuchElementException("Can't get by email ")));
     }
 
     @GetMapping("/by-user")
@@ -44,6 +46,7 @@ public class ShoppingCartController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         return cartMapper.toDto(cartService.getByUser(userService
-                .findByEmail(details.getUsername())));
+                .findByEmail(details.getUsername()).orElseThrow(() ->
+                        new NoSuchElementException("Can't get by email "))));
     }
 }
