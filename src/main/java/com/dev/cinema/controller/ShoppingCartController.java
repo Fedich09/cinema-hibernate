@@ -37,8 +37,7 @@ public class ShoppingCartController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         cartService.addSession(movieSessionService.get(movieSessionId),
-                userService.findByEmail(details.getUsername()).orElseThrow(() ->
-                        new NoSuchElementException("Can't get by email ")));
+                userService.findByEmail(details.getUsername()).get());
     }
 
     @GetMapping("/by-user")
@@ -46,7 +45,6 @@ public class ShoppingCartController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         return cartMapper.toDto(cartService.getByUser(userService
-                .findByEmail(details.getUsername()).orElseThrow(() ->
-                        new NoSuchElementException("Can't get by email "))));
+                .findByEmail(details.getUsername()).get()));
     }
 }

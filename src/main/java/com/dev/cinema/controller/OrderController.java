@@ -47,7 +47,7 @@ public class OrderController {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
         return orderService.getOrdersHistory(userService.findByEmail(details.getUsername())
-                .orElseThrow(() -> new NoSuchElementException("Can't get by email ")))
+                .get())
                 .stream()
                 .map(orderMapper::toDto)
                 .collect(Collectors.toList());
