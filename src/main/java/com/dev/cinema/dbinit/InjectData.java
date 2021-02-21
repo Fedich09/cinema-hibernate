@@ -17,7 +17,6 @@ public class InjectData {
     private final ShoppingCartService shoppingCartService;
     private final SecurityConfig securityConfig;
 
-
     public InjectData(UserService userService,
                       RoleService roleService,
                       ShoppingCartService shoppingCartService,

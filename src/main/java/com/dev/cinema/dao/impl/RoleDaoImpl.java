@@ -41,7 +41,8 @@ public class RoleDaoImpl implements RoleDao {
     @Override
     public Role getRoleByName(String roleName) {
         try (Session session = sessionFactory.openSession()) {
-            Query<Role> query = session.createQuery("from Role r where r.roleName = :roleName", Role.class);
+            Query<Role> query = session.createQuery("from Role r "
+                    + "where r.roleName = :roleName", Role.class);
             query.setParameter("roleName", roleName);
             return query.getSingleResult();
         } catch (Exception e) {
