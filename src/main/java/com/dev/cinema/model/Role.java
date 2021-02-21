@@ -23,7 +23,6 @@ public class Role {
         this.roleName = roleName;
     }
 
-    @Id
     public Long getId() {
         return id;
     }
