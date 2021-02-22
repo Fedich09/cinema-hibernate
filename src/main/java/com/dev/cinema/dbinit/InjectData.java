@@ -1,6 +1,5 @@
 package com.dev.cinema.dbinit;
 
-import com.dev.cinema.config.SecurityConfig;
 import com.dev.cinema.model.Role;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.RoleService;
@@ -15,16 +14,13 @@ public class InjectData {
     private final UserService userService;
     private final RoleService roleService;
     private final ShoppingCartService shoppingCartService;
-    private final SecurityConfig securityConfig;
 
     public InjectData(UserService userService,
                       RoleService roleService,
-                      ShoppingCartService shoppingCartService,
-                      SecurityConfig securityConfig) {
+                      ShoppingCartService shoppingCartService) {
         this.userService = userService;
         this.roleService = roleService;
         this.shoppingCartService = shoppingCartService;
-        this.securityConfig = securityConfig;
     }
 
     @PostConstruct
@@ -37,7 +33,7 @@ public class InjectData {
         roleService.add(userRole);
         User user = new User();
         user.setEmail("admin@gmail.com");
-        user.setPassword(securityConfig.getEncoder().encode("admin"));
+        user.setPassword("admin");
         user.setRoles(List.of(roleService.getRoleByName("ADMIN")));
         shoppingCartService.registerNewShoppingCart(userService.add(user));
     }
