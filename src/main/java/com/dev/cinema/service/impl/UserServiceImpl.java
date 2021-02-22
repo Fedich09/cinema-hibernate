@@ -1,25 +1,25 @@
 package com.dev.cinema.service.impl;
 
-import com.dev.cinema.config.SecurityConfig;
 import com.dev.cinema.dao.UserDao;
 import com.dev.cinema.model.User;
 import com.dev.cinema.service.UserService;
 import java.util.Optional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-    private final SecurityConfig securityConfig;
+    private final PasswordEncoder encode;
 
-    public UserServiceImpl(UserDao userDao, SecurityConfig securityConfig) {
+    public UserServiceImpl(UserDao userDao, PasswordEncoder encode) {
         this.userDao = userDao;
-        this.securityConfig = securityConfig;
+        this.encode = encode;
     }
 
     @Override
     public User add(User user) {
-        user.setPassword(securityConfig.getEncoder().encode(user.getPassword()));
+        user.setPassword(encode.encode(user.getPassword()));
         return userDao.add(user);
     }
 
