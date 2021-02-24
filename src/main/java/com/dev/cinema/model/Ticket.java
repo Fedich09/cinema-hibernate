@@ -17,7 +17,7 @@ public class Ticket {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "movie_session_id")
-    private MovieSession movieSession;
+    private PerformanceSession performanceSession;
     @ManyToOne
     private User user;
 
@@ -29,12 +29,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public MovieSession getMovieSession() {
-        return movieSession;
+    public PerformanceSession getMovieSession() {
+        return performanceSession;
     }
 
-    public void setMovieSession(MovieSession movieSession) {
-        this.movieSession = movieSession;
+    public void setMovieSession(PerformanceSession performanceSession) {
+        this.performanceSession = performanceSession;
     }
 
     public User getUser() {
@@ -49,7 +49,7 @@ public class Ticket {
     public String toString() {
         return "Ticket{"
                 + "id=" + id
-                + ", movieSession=" + movieSession
+                + ", movieSession=" + performanceSession
                 + ", user=" + user
                 + '}';
     }
@@ -64,12 +64,12 @@ public class Ticket {
         }
         Ticket ticket = (Ticket) o;
         return Objects.equals(id, ticket.id)
-                && Objects.equals(movieSession, ticket.movieSession)
+                && Objects.equals(performanceSession, ticket.performanceSession)
                 && Objects.equals(user, ticket.user);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, movieSession, user);
+        return Objects.hash(id, performanceSession, user);
     }
 }

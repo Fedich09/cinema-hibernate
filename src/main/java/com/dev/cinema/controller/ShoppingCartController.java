@@ -1,7 +1,7 @@
 package com.dev.cinema.controller;
 
 import com.dev.cinema.model.dto.shoppingcart.ShoppingCartResponseDto;
-import com.dev.cinema.service.MovieSessionService;
+import com.dev.cinema.service.PerformanceSessionService;
 import com.dev.cinema.service.ShoppingCartService;
 import com.dev.cinema.service.UserService;
 import com.dev.cinema.service.mapper.ShoppingCartMapper;
@@ -18,16 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ShoppingCartController {
     private final ShoppingCartMapper cartMapper;
     private final ShoppingCartService cartService;
-    private final MovieSessionService movieSessionService;
+    private final PerformanceSessionService performanceSessionService;
     private final UserService userService;
 
     public ShoppingCartController(ShoppingCartMapper cartMapper,
                                   ShoppingCartService cartService,
-                                  MovieSessionService movieSessionService,
+                                  PerformanceSessionService performanceSessionService,
                                   UserService userService) {
         this.cartMapper = cartMapper;
         this.cartService = cartService;
-        this.movieSessionService = movieSessionService;
+        this.performanceSessionService = performanceSessionService;
         this.userService = userService;
     }
 
@@ -35,7 +35,7 @@ public class ShoppingCartController {
     public void addMovieSession(Authentication auth, @RequestParam Long movieSessionId) {
         Object principal = auth.getPrincipal();
         UserDetails details = (UserDetails) principal;
-        cartService.addSession(movieSessionService.get(movieSessionId),
+        cartService.addSession(performanceSessionService.get(movieSessionId),
                 userService.findByEmail(details.getUsername()).get());
     }
 
