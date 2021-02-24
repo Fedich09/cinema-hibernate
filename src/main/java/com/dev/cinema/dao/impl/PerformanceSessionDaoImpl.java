@@ -27,7 +27,7 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
             LocalDateTime startOfDay = date.atStartOfDay();
             LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
             Query<PerformanceSession> movieQuery = session.createQuery("from PerformanceSession ms "
-                    + "where ms.movie.id = :id "
+                    + "where ms.performance.id = :id "
                     + "and ms.showTime >= :start "
                     + "and ms.showTime <= :end", PerformanceSession.class);
             movieQuery.setParameter("id", movieId);
@@ -110,7 +110,7 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
         try (Session session = sessionFactory.openSession()) {
             return session.get(PerformanceSession.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie session by id " + id, e);
+            throw new DataProcessingException("Can't get performance session by id " + id, e);
         }
     }
 }

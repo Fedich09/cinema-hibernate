@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "movie_session")
+@Table(name = "performance_session")
 public class PerformanceSession {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class PerformanceSession {
     @ManyToOne
     private Performance performance;
     @ManyToOne
-    @JoinColumn(name = "cinema_hall_id")
+    @JoinColumn(name = "stage_id")
     private Stage stage;
     @JoinColumn(name = "show_time")
     private LocalDateTime showTime;
@@ -32,19 +32,19 @@ public class PerformanceSession {
         this.id = id;
     }
 
-    public Performance getMovie() {
+    public Performance getPerformance() {
         return performance;
     }
 
-    public void setMovie(Performance performance) {
+    public void setPerformance(Performance performance) {
         this.performance = performance;
     }
 
-    public Stage getCinemaHall() {
+    public Stage getStage() {
         return stage;
     }
 
-    public void setCinemaHall(Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
@@ -58,10 +58,10 @@ public class PerformanceSession {
 
     @Override
     public String toString() {
-        return "MovieSession{"
+        return "PerformanceSession{"
                 + "id=" + id
-                + ", movie=" + performance
-                + ", cinemaHall=" + stage
+                + ", performance=" + performance
+                + ", stage=" + stage
                 + ", showTime=" + showTime
                 + '}';
     }

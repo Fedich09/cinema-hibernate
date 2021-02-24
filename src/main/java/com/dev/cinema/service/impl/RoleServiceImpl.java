@@ -15,11 +15,13 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void add(Role role) {
-        roleDao.add(role);
+        if (roleDao.getRoleByName(role.getRoleName()).isEmpty()) {
+            roleDao.add(role);
+        }
     }
 
     @Override
     public Role getRoleByName(String roleName) {
-        return roleDao.getRoleByName(roleName);
+        return roleDao.getRoleByName(roleName).get();
     }
 }

@@ -2,10 +2,10 @@ package com.dev.cinema.model.dto.performancesession;
 
 public class PerformanceSessionResponseDto {
     private Long id;
-    private String movieTitle;
-    private String movieDescription;
-    private Long cinemaId;
-    private String cinemaDescription;
+    private String performanceTitle;
+    private String PerformanceDescription;
+    private Long stageId;
+    private String stageDescription;
     private String showTime;
 
     public Long getId() {
@@ -16,36 +16,36 @@ public class PerformanceSessionResponseDto {
         this.id = id;
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public String getPerformanceTitle() {
+        return performanceTitle;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public void setPerformanceTitle(String performanceTitle) {
+        this.performanceTitle = performanceTitle;
     }
 
-    public String getMovieDescription() {
-        return movieDescription;
+    public String getPerformanceDescription() {
+        return PerformanceDescription;
     }
 
-    public void setMovieDescription(String movieDescription) {
-        this.movieDescription = movieDescription;
+    public void setPerformanceDescription(String performanceDescription) {
+        this.PerformanceDescription = performanceDescription;
     }
 
-    public Long getCinemaId() {
-        return cinemaId;
+    public Long getStageId() {
+        return stageId;
     }
 
-    public void setCinemaId(Long cinemaId) {
-        this.cinemaId = cinemaId;
+    public void setStageId(Long stageId) {
+        this.stageId = stageId;
     }
 
-    public String getCinemaDescription() {
-        return cinemaDescription;
+    public String getStageDescription() {
+        return stageDescription;
     }
 
-    public void setCinemaDescription(String cinemaDescription) {
-        this.cinemaDescription = cinemaDescription;
+    public void setStageDescription(String stageDescription) {
+        this.stageDescription = stageDescription;
     }
 
     public String getShowTime() {

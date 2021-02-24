@@ -33,7 +33,7 @@ public class InjectData {
         roleService.add(userRole);
         User user = new User();
         user.setEmail("admin@gmail.com");
-        user.setPassword("admin");
+        user.setPassword("1234");
         user.setRoles(List.of(roleService.getRoleByName("ADMIN")));
         shoppingCartService.registerNewShoppingCart(userService.add(user));
     }

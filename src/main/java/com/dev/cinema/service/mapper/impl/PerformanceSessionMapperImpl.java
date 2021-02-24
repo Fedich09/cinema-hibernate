@@ -24,10 +24,10 @@ public class PerformanceSessionMapperImpl implements PerformanceSessionMapper {
     public PerformanceSessionResponseDto toDto(PerformanceSession session) {
         PerformanceSessionResponseDto responseDto = new PerformanceSessionResponseDto();
         responseDto.setId(session.getId());
-        responseDto.setCinemaDescription(session.getCinemaHall().getDescription());
-        responseDto.setMovieDescription(session.getMovie().getDescription());
-        responseDto.setMovieTitle(session.getMovie().getTitle());
-        responseDto.setCinemaId(session.getCinemaHall().getId());
+        responseDto.setStageDescription(session.getStage().getDescription());
+        responseDto.setPerformanceDescription(session.getPerformance().getDescription());
+        responseDto.setPerformanceTitle(session.getPerformance().getTitle());
+        responseDto.setStageId(session.getStage().getId());
         responseDto.setShowTime(session.getShowTime().toString());
         return responseDto;
     }
@@ -36,8 +36,8 @@ public class PerformanceSessionMapperImpl implements PerformanceSessionMapper {
     public PerformanceSession toEntity(PerformanceSessionRequestDto responseDto) {
         PerformanceSession performanceSession = new PerformanceSession();
         DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        performanceSession.setMovie(performanceService.get(responseDto.getMovieId()));
-        performanceSession.setCinemaHall(stageService.get(responseDto.getCinemaHallId()));
+        performanceSession.setPerformance(performanceService.get(responseDto.getPerformanceId()));
+        performanceSession.setStage(stageService.get(responseDto.getStageId()));
         performanceSession.setShowTime(LocalDateTime.parse(responseDto.getShowTime(), formatter));
         return performanceSession;
     }
