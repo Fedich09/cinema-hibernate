@@ -32,7 +32,7 @@ public class PerformanceDaoImpl implements PerformanceDao {
             if (transaction != null) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't insert Movie entity " + performance, e);
+            throw new DataProcessingException("Can't insert performance entity " + performance, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -43,10 +43,11 @@ public class PerformanceDaoImpl implements PerformanceDao {
     @Override
     public List<Performance> getAll() {
         try (Session session = sessionFactory.openSession()) {
-            Query<Performance> movieQuery = session.createQuery("from Performance", Performance.class);
+            Query<Performance> movieQuery = session
+                    .createQuery("from Performance", Performance.class);
             return movieQuery.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get list of all movies ", e);
+            throw new DataProcessingException("Can't get list of all performance ", e);
         }
     }
 
@@ -55,7 +56,7 @@ public class PerformanceDaoImpl implements PerformanceDao {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Performance.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get movie by id" + id, e);
+            throw new DataProcessingException("Can't get performance by id" + id, e);
         }
     }
 }

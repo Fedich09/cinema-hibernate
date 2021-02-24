@@ -6,6 +6,7 @@ import com.dev.cinema.model.dto.performancesession.PerformanceSessionResponseDto
 import com.dev.cinema.service.mapper.genericmapper.GenericMapperRequest;
 import com.dev.cinema.service.mapper.genericmapper.GenericMapperResponse;
 
-public interface PerformanceSessionMapper extends GenericMapperResponse<PerformanceSessionResponseDto,
-        PerformanceSession>, GenericMapperRequest<PerformanceSession, PerformanceSessionRequestDto> {
+public interface PerformanceSessionMapper extends GenericMapperResponse
+        <PerformanceSessionResponseDto, PerformanceSession>,
+        GenericMapperRequest<PerformanceSession, PerformanceSessionRequestDto> {
 }

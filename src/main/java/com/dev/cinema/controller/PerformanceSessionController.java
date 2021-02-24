@@ -32,7 +32,8 @@ public class PerformanceSessionController {
     }
 
     @PostMapping
-    public void create(@RequestBody @Valid PerformanceSessionRequestDto performanceSessionRequestDto) {
+    public void create(
+            @RequestBody @Valid PerformanceSessionRequestDto performanceSessionRequestDto) {
         performanceSessionService.add(sessionMapper.toEntity(performanceSessionRequestDto));
     }
 
@@ -49,7 +50,8 @@ public class PerformanceSessionController {
     @PutMapping("/{id}")
     public void update(@RequestBody PerformanceSessionRequestDto performanceSessionRequestDto,
                        @PathVariable Long id) {
-        PerformanceSession performanceSession = sessionMapper.toEntity(performanceSessionRequestDto);
+        PerformanceSession performanceSession = sessionMapper
+                .toEntity(performanceSessionRequestDto);
         performanceSession.setId(id);
         performanceSessionService.update(performanceSession);
     }

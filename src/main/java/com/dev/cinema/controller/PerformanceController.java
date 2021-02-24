@@ -18,7 +18,8 @@ public class PerformanceController {
     private final PerformanceService performanceService;
     private final PerformanceMapperImpl movieMapperImpl;
 
-    public PerformanceController(PerformanceService performanceService, PerformanceMapperImpl movieMapperImpl) {
+    public PerformanceController(PerformanceService performanceService,
+                                 PerformanceMapperImpl movieMapperImpl) {
         this.performanceService = performanceService;
         this.movieMapperImpl = movieMapperImpl;
     }

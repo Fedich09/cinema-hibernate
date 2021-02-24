@@ -32,7 +32,7 @@ public class StageDaoImpl implements StageDao {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add cinema hall " + stage, e);
+            throw new DataProcessingException("Can't add stage " + stage, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -46,7 +46,7 @@ public class StageDaoImpl implements StageDao {
             Query<Stage> query = session.createQuery("from Stage", Stage.class);
             return query.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get all cinema halls ", e);
+            throw new DataProcessingException("Can't get all stages ", e);
         }
     }
 
@@ -55,7 +55,7 @@ public class StageDaoImpl implements StageDao {
         try (Session session = sessionFactory.openSession()) {
             return session.get(Stage.class, id);
         } catch (Exception e) {
-            throw new DataProcessingException("Can't get cinema hall by id " + id, e);
+            throw new DataProcessingException("Can't get stage by id " + id, e);
         }
     }
 }

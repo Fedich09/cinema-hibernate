@@ -3,7 +3,7 @@ package com.dev.cinema.model.dto.performancesession;
 public class PerformanceSessionResponseDto {
     private Long id;
     private String performanceTitle;
-    private String PerformanceDescription;
+    private String performanceDescription;
     private Long stageId;
     private String stageDescription;
     private String showTime;
@@ -25,11 +25,11 @@ public class PerformanceSessionResponseDto {
     }
 
     public String getPerformanceDescription() {
-        return PerformanceDescription;
+        return performanceDescription;
     }
 
     public void setPerformanceDescription(String performanceDescription) {
-        this.PerformanceDescription = performanceDescription;
+        this.performanceDescription = performanceDescription;
     }
 
     public Long getStageId() {

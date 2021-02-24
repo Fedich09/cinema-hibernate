@@ -3,8 +3,8 @@ package com.dev.cinema.service.mapper.impl;
 import com.dev.cinema.model.PerformanceSession;
 import com.dev.cinema.model.dto.performancesession.PerformanceSessionRequestDto;
 import com.dev.cinema.model.dto.performancesession.PerformanceSessionResponseDto;
-import com.dev.cinema.service.StageService;
 import com.dev.cinema.service.PerformanceService;
+import com.dev.cinema.service.StageService;
 import com.dev.cinema.service.mapper.PerformanceSessionMapper;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +15,8 @@ public class PerformanceSessionMapperImpl implements PerformanceSessionMapper {
     private PerformanceService performanceService;
     private StageService stageService;
 
-    public PerformanceSessionMapperImpl(PerformanceService performanceService, StageService stageService) {
+    public PerformanceSessionMapperImpl(PerformanceService performanceService,
+                                        StageService stageService) {
         this.performanceService = performanceService;
         this.stageService = stageService;
     }

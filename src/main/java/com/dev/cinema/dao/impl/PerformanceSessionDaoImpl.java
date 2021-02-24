@@ -22,7 +22,7 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
     }
 
     @Override
-    public List<PerformanceSession> findAvailableSessions(Long movieId, LocalDate date) {
+    public List<PerformanceSession> findAvailableSessions(Long performanceId, LocalDate date) {
         try (Session session = sessionFactory.openSession()) {
             LocalDateTime startOfDay = date.atStartOfDay();
             LocalDateTime endOfDay = date.atTime(LocalTime.MAX);
@@ -30,13 +30,14 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
                     + "where ms.performance.id = :id "
                     + "and ms.showTime >= :start "
                     + "and ms.showTime <= :end", PerformanceSession.class);
-            movieQuery.setParameter("id", movieId);
+            movieQuery.setParameter("id", performanceId);
             movieQuery.setParameter("start", startOfDay);
             movieQuery.setParameter("end", endOfDay);
             return movieQuery.getResultList();
         } catch (Exception e) {
-            throw new DataProcessingException("Can't find available sessions on this movie id "
-                    + movieId + " and on this date " + date, e);
+            throw new DataProcessingException("Can't find available sessions on "
+                    + "this performance id "
+                    + performanceId + " and on this date " + date, e);
         }
     }
 
@@ -54,7 +55,8 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't add movie session " + performanceSession, e);
+            throw new DataProcessingException("Can't add performance session "
+                    + performanceSession, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -76,7 +78,7 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't delete movie session by id " + id, e);
+            throw new DataProcessingException("Can't delete performance session by id " + id, e);
         } finally {
             if (session != null) {
                 session.close();
@@ -97,7 +99,8 @@ public class PerformanceSessionDaoImpl implements PerformanceSessionDao {
             if (transaction != null && transaction.isActive()) {
                 transaction.rollback();
             }
-            throw new DataProcessingException("Can't update movie session " + performanceSession, e);
+            throw new DataProcessingException("Can't update performance session "
+                    + performanceSession, e);
         } finally {
             if (session != null) {
                 session.close();
