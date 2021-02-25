@@ -19,9 +19,9 @@ public class PerformanceController {
     private final PerformanceMapperImpl movieMapperImpl;
 
     public PerformanceController(PerformanceService performanceService,
-                                 PerformanceMapperImpl movieMapperImpl) {
+                                 PerformanceMapperImpl performanceMapper) {
         this.performanceService = performanceService;
-        this.movieMapperImpl = movieMapperImpl;
+        this.movieMapperImpl = performanceMapper;
     }
 
     @PostMapping

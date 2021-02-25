@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface PerformanceSessionDao {
-    List<PerformanceSession> findAvailableSessions(Long movieId, LocalDate date);
+    List<PerformanceSession> findAvailableSessions(Long performanceId, LocalDate date);
 
     PerformanceSession add(PerformanceSession session);
 
