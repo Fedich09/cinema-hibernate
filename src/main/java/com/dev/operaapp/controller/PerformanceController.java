@@ -16,23 +16,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/performances")
 public class PerformanceController {
     private final PerformanceService performanceService;
-    private final PerformanceMapperImpl movieMapperImpl;
+    private final PerformanceMapperImpl performanceMapper;
 
     public PerformanceController(PerformanceService performanceService,
                                  PerformanceMapperImpl performanceMapper) {
         this.performanceService = performanceService;
-        this.movieMapperImpl = performanceMapper;
+        this.performanceMapper = performanceMapper;
     }
 
     @PostMapping
     public void create(@RequestBody @Valid PerformanceRequestDto requestDto) {
-        performanceService.add(movieMapperImpl.toEntity(requestDto));
+        performanceService.add(performanceMapper.toEntity(requestDto));
     }
 
     @RequestMapping
     public List<PerformanceResponseDto> getAll() {
         return performanceService.getAll().stream()
-                .map(movieMapperImpl::toDto)
+                .map(performanceMapper::toDto)
                 .collect(Collectors.toList());
     }
 }
