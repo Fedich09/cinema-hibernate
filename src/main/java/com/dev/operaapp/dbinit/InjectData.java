@@ -27,8 +27,8 @@ public class InjectData {
     private void addRolesAndAdmin() {
         Role adminRole = new Role();
         adminRole.setRoleName("ADMIN");
-        Role userRole = new Role();
         roleService.add(adminRole);
+        Role userRole = new Role();
         userRole.setRoleName("USER");
         roleService.add(userRole);
         User user = new User();

@@ -41,7 +41,7 @@ public class AppConfig {
     public LocalSessionFactoryBean getSessionFactory() {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPackagesToScan("com.dev.cinema.model");
+        factoryBean.setPackagesToScan("com.dev.operaapp.model");
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", environment
                 .getProperty("hibernate.show_sql"));
