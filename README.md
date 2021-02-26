@@ -42,11 +42,11 @@ Represents N-tier architecture with model, dao, service, controller layers that 
 1. Download and install the JDK
 2. Download and install web-server (for example Apache Tomcat)
 3. Download and install MySQL. Setup connection properties in **db.properties** file
-4. user: "your username"
-5. password: "your password"
-6. db.url=jdbc:mysql://localhost/*your_db_name*?serverTimezone=EET
-7. Run a project
+* user: "your username"
+* password: "your password"
+* db.url=jdbc:mysql://localhost/*your_db_name*?serverTimezone=EET
+4. Run a project
 
-##Author
+## Author
 
 Maksym Fedenko
